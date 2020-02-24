@@ -1,0 +1,50 @@
+@keyframes waver {
+  0% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-15deg);
+  }
+  50% {
+    transform: rotate(0);
+  }
+  75% {
+    transform: rotate(15deg);
+  }
+}
+
+.touchbar__wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ccddee;
+}
+
+.touchbar__content {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.touchbar__content img {
+  display: block;
+  max-width: 100%;
+  will-change: transform;
+  transform: rotate(0);
+  animation: waver 3s infinite ease-in-out;
+  cursor: pointer;
+}
+
+.touchbar__content-lable {
+  width: 100%;
+  margin-top: 30px;
+  text-align: center;
+}

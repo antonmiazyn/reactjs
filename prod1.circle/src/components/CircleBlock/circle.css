@@ -1,0 +1,22 @@
+@keyframes flowTop {
+  from {
+    top: 100%;
+  }
+  to {
+    top: calc(50% - 300px);
+  }
+}
+
+.circle {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  top: calc(50% - 300px);
+  left: calc(50% - 300px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #bbbfff;
+  border-radius: 50%;
+  animation: flowTop 2s;
+}
