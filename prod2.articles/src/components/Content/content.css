@@ -1,0 +1,14 @@
+.content {
+  padding: 30px;
+}
+
+.acticle__container {
+  max-width: 50%;
+  line-height: 1.4em;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+
+.acticle__container p {
+  margin-top: 15px;
+}
