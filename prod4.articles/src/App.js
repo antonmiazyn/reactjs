@@ -6,7 +6,7 @@ import ShowMoreButton from './components/Content/ShowMoreButton';
 import list from './components/Content/list.js';
 import './components/Content/content.css';
 
-//cd /D d:/Reactjs/tutorial/prod4.articles
+  /*=================================================*/
 
 class App extends React.Component {
   constructor(props) {
@@ -26,6 +26,7 @@ class App extends React.Component {
       itterator: 4,
       editorVisible: true,
       showActive: false,
+      articlesHidderButton: true,
       userTitle: '',
       userText: ''
     }
@@ -37,12 +38,14 @@ class App extends React.Component {
     this.setTitle = this.setTitle.bind(this);
     this.setText = this.setText.bind(this);
     this.clearFields = this.clearFields.bind(this);
+    this.deleteArticles = this.deleteArticles.bind(this);
 
     this.shortList = new Array();
 
     this.elementsCounter = this.state.itterator;
-
   }
+
+  /*=================================================*/
 
   editPanelOPening() {
     this.setState({
@@ -63,17 +66,23 @@ class App extends React.Component {
     }
   }
 
+  /*=================================================*/
+
   setTitle(event) {
     this.setState({
       userTitle: event.target.value
     })
   }
 
+  /*=================================================*/
+
   setText(event) {
     this.setState({
       userText: event.target.value
     })
   }
+
+  /*=================================================*/
 
   addElement() {
     this.listC.push({
@@ -88,6 +97,8 @@ class App extends React.Component {
     })
   }
 
+  /*=================================================*/
+
   elementsCounterAdd() {
     this.setState({
       itterator: this.state.itterator += 4
@@ -100,13 +111,15 @@ class App extends React.Component {
       })
     } else {
       this.setState({
-        articlesToShow: this.listC
+        articlesToShow: this.listC,
       })
     }
     for(let i = 0; i < this.elementsCounter; i++) {
       this.shortList[i] = this.listC[i];
     }
   }
+
+  /*=================================================*/
 
   handleShowList() {
     this.setState({
@@ -144,6 +157,8 @@ class App extends React.Component {
     }
   }
 
+  /*=================================================*/
+
   clearFields() {
     this.setState({
       userTitle: '',
@@ -151,13 +166,28 @@ class App extends React.Component {
     })
   }
 
-  render() {
+  /*=================================================*/
 
-    if(this.state.moreButton) {
-      this.moreButtonRender = <ShowMoreButton itteratorUp={this.elementsCounterAdd} />
+  deleteArticles() {
+    this.setState({
+      articlesToShow: [],
+      articlesCounter: 0,
+      moreButton: false
+    })
+    for(let i = 0; i < this.listC.length; i++) {
+      this.listC.splice(i);
+    }
+  }
+
+  /*=================================================*/
+
+  render() {
+    if(!(this.listC.length - this.shortList.length < 1) && this.state.moreButton) {
+        this.moreButtonRender = <ShowMoreButton itteratorUp={this.elementsCounterAdd} />
     } else {
       this.moreButtonRender = ''
     }
+    console.log(this.listC.length);
 
     if(this.state.editorVisible) {
       this.editorRender = <Editor
@@ -185,11 +215,18 @@ class App extends React.Component {
       this.activeEditRender = <a className="unactive">Edit Panel</a>
     }
 
+    if(this.state.articlesHidden) {
+      this.edditorButtonRender = <a onClick={this.deleteArticles}>Clear Articles</a>
+    } else {
+      this.edditorButtonRender = <a className="unactive">Clear Articles</a>
+    }
+
     return(
       <div className="container">
         <Header
           showActiveButton={this.activeButtonRender}
           showEditButton={this.activeEditRender}
+          showHidderButton={this.edditorButtonRender}
         />
         <div className="content">
           <Content
@@ -202,5 +239,7 @@ class App extends React.Component {
     );
   }
 }
+
+  /*=================================================*/
 
 export default App;

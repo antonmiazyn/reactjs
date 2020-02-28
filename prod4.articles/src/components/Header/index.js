@@ -7,6 +7,7 @@ function Header(props) {
     <header>
       <Logotype />
       <div className="header__linker">
+        {props.showHidderButton}
         {props.showEditButton}
         {props.showActiveButton}
       </div>
